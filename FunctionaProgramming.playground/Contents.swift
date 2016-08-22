@@ -10,3 +10,10 @@ for i in 1...10 {
 }
 print(evens)
 
+//
+func isEven(number: Int) -> Bool {
+    return number % 2 == 0
+}
+evens = Array(1...10).filter(isEven)
+evens = Array(1...10).filter{$0 % 2 == 0}
+print(evens)
