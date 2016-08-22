@@ -30,9 +30,23 @@ print(evens)
 // functions are closures 
 // instead to pass a isEven() function use a closure/block
 // 3 Closures:
-// anonymous functions you create in-place. 
+// anonymous functions you create in-place.
 evens = Array(1...10).filter { (number) in number % 2 == 0 }
 print(evens)
 
 evens = Array(1...10).filter{$0 % 2 == 0}
 print(evens)
+
+//Generic function 
+// input source: array of type T
+// predicate: function that takes an instance of T
+// returns: Bool 
+func myFilter<T>(source: [T], predicate:(T) -> Bool) -> [T] {
+    var result = [T]()
+    for i in source {
+        if predicate(i) {
+            result.append(i)
+        }
+    }
+    return result
+}
