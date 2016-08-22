@@ -40,7 +40,7 @@ print(evens)
 //Generic function 
 // input source: array of type T
 // predicate: function that takes an instance of T
-// returns: Bool 
+// returns: Bool
 func myFilter<T>(source: [T], predicate:(T) -> Bool) -> [T] {
     var result = [T]()
     for i in source {
@@ -50,3 +50,7 @@ func myFilter<T>(source: [T], predicate:(T) -> Bool) -> [T] {
     }
     return result
 }
+
+evens = myFilter(Array(1...10), predicate: { number in number % 2 == 0})
+print(evens)
+
