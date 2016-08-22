@@ -16,11 +16,18 @@ func isEven(number: Int) -> Bool {
 }
 
 // difference between map and filter 
-let evens1 = Array(1...10).filter(isEven)
-let evens2 = Array(1...10).filter{$0 % 2 == 0}
-let evens3 = Array(1...10).map{$0 % 2}
+// filter
+//creates and returns a new array that contains only the items for which the given function returns true.
+evens = Array(1...10).filter(isEven)
+print(evens)
 
-print(evens1)
-print(evens2)
-print(evens3)
-    
+evens = Array(1...10).map{$0 % 2}
+print(evens)
+
+// functions are closures 
+// instead to pass a isEven() function use a closure/block
+evens = Array(1...10).filter { (number) in number % 2 == 0 }
+print(evens)
+
+evens = Array(1...10).filter{$0 % 2 == 0}
+print(evens)
