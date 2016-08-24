@@ -54,3 +54,17 @@ func myFilter<T>(source: [T], predicate:(T) -> Bool) -> [T] {
 evens = myFilter(Array(1...10), predicate: { number in number % 2 == 0})
 print(evens)
 
+extension CollectionType {
+    func myFilter(predicate: (Self.Generator.Element) -> Bool) -> [Self.Generator.Element] {
+        var result : [Self.Generator.Element] = []
+        for element in self {
+            if predicate(element) {
+                result.append(element)
+            }
+        }
+        return result
+    }
+}
+
+evens = Array(1...20).myFilter({$0 % 2 == 0})
+print(evens)
