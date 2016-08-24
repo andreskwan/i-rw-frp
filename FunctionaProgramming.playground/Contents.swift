@@ -104,3 +104,10 @@ sum = Array(0...10)
 
 print(sum)
 
+/*
+ Max number
+ */
+
+let arrayOfNumbers = [2, 5, 3, 8, 16]
+
+arrayOfNumbers.reduce(0){(total, number) in max(total, number) }
