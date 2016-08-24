@@ -2,6 +2,9 @@
 
 import UIKit
 
+/*
+ Filtering - do not change just extract
+ */
 var evens = [Int]()
 for i in 1...10 {
     if i % 2 == 0 {
@@ -53,4 +56,24 @@ func myFilter<T>(source: [T], predicate:(T) -> Bool) -> [T] {
 
 evens = myFilter(Array(1...10), predicate: { number in number % 2 == 0})
 print(evens)
+
+/*
+
+ Reducing - a reduce function, takes a set of inputs and generates a single output.
+ 
+ */
+
+var sum = 0
+let evenArray = Array(1...10).filter{ $0 % 2 == 0 }
+for element in evenArray {
+    sum += element
+}
+print(sum)
+
+sum = Array(0...10)
+        .filter{ $0 % 2 == 0 }
+        .reduce(0,combine: { (total, number) in total + number })
+print(sum)
+
+
 
