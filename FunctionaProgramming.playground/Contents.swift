@@ -57,8 +57,23 @@ func myFilter<T>(source: [T], predicate:(T) -> Bool) -> [T] {
 evens = myFilter(Array(1...10), predicate: { number in number % 2 == 0})
 print(evens)
 
-/*
+extension CollectionType {
+    func myFilter(predicate: (Self.Generator.Element) -> Bool) -> [Self.Generator.Element] {
+        var result : [Self.Generator.Element] = []
+        for element in self {
+            if predicate(element) {
+                result.append(element)
+            }
+        }
+        return result
+    }
+}
 
+evens = Array(1...20).myFilter({$0 % 2 == 0})
+print(evens)
+
+/*
+ 
  Reducing - a reduce function, takes a set of inputs and generates a single output.
  
  */
@@ -71,9 +86,7 @@ for element in evenArray {
 print(sum)
 
 sum = Array(0...10)
-        .filter{ $0 % 2 == 0 }
-        .reduce(0,combine: { (total, number) in total + number })
+    .filter{ $0 % 2 == 0 }
+    .reduce(0,combine: { (total, number) in total + number })
 print(sum)
-
-
 
