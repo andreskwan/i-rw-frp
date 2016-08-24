@@ -85,8 +85,22 @@ for element in evenArray {
 }
 print(sum)
 
+/*
+ to understand reduce I use the signature of the reduce method
+
+ func reduce<U>(initial: U, combine: (U, T) -> U) -> U
+
+ */
 sum = Array(0...10)
     .filter{ $0 % 2 == 0 }
     .reduce(0,combine: { (total, number) in total + number })
+
+// simplification
+// if last argument of a function is a block/closure
+// can be outside the ()
+sum = Array(0...10)
+    .filter{ $0 % 2 == 0 }
+    .reduce(0){ (total, number) in total + number }
+
 print(sum)
 
