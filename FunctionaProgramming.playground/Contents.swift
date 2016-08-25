@@ -147,13 +147,15 @@ func buildIndex(words: [String]) -> [Entry] {
         return Character(word.substringToIndex(word.startIndex.advancedBy(1)).uppercaseString)
     }
     
-    //
-    let letters0 = words.map{ (word) -> Character in
+    var letters = words.map{ (word) -> Character in
         return firstLetter(word)
     }
-    print(letters0)
+    print(letters)
     
-    let letters = words.map{ firstLetter($0) }
+    letters = words.map{ firstLetter($0) }
+    print(letters)
+    
+    letters = words.map(firstLetter)
     print(letters)
     
     return [Entry]()
