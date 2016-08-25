@@ -127,6 +127,13 @@ print(numbers)
 
 /*
  mapping - transformations
+ 
+ */
+
+/*
+ map - example 1
+ 
+ Building an Index the Functional Way
  */
 let words = ["Cat", "Chicken", "fish", "Dog",
              "Mouse", "Guinea Pig", "monkey"]
@@ -134,7 +141,16 @@ let words = ["Cat", "Chicken", "fish", "Dog",
 //define a type alias for a dupla
 typealias Entry = (Character, [String])
 
+
 func buildIndex(words: [String]) -> [Entry] {
+    let letters = words.map {
+        //I specify what I want to return
+        (word) -> Character in
+        let index = word.startIndex.advancedBy(1)
+        return Character(word.substringToIndex(index).uppercaseString)
+    }
+    print(letters)
+    
     return [Entry]()
 }
 
