@@ -3,7 +3,8 @@
 import UIKit
 
 /*
- Filtering - do not change just extract
+ Filtering 
+ - do not change just extract
  */
 var evens = [Int]()
 for i in 1...10 {
@@ -73,8 +74,9 @@ evens = Array(1...20).myFilter({$0 % 2 == 0})
 print(evens)
 
 /*
+ Reducing
  
- Reducing - a reduce function, takes a set of inputs and generates a single output.
+ - a reduce function, takes a set of inputs and generates a single output.
  
  */
 
@@ -86,7 +88,8 @@ for element in evenArray {
 print(sum)
 
 /*
- to understand reduce I use the signature of the reduce method
+ Reduce 
+ - to understand reduce I use the signature of the reduce method
 
  func reduce<U>(initial: U, combine: (U, T) -> U) -> U
 
@@ -105,7 +108,7 @@ sum = Array(0...10)
 print(sum)
 
 /*
- Max number
+ Reduce - Max number
  */
 
 let arrayOfNumbers = [2, 5, 3, 8, 16]
@@ -113,11 +116,28 @@ let arrayOfNumbers = [2, 5, 3, 8, 16]
 arrayOfNumbers.reduce(0){(total, number) in max(total, number) }
 
 /*
- reduce has two type parameters, U and T, which can be different and certainly don’t have to be integers. This means you can reduce an array of one type into a completely different type.
+ Reduce 
+ - has two type parameters, U and T, which can be different and certainly don’t have to be integers. This means you can reduce an array of one type into a completely different type.
  */
 // from [Int]() to String
 
 let numbers = Array(1...10)
     .reduce("numbers: ") {(total, number) in total + "\(number) "}
 print(numbers)
+
+/*
+ mapping - transformations
+ */
+let words = ["Cat", "Chicken", "fish", "Dog",
+             "Mouse", "Guinea Pig", "monkey"]
+
+//define a type alias for a dupla
+typealias Entry = (Character, [String])
+
+func buildIndex(words: [String]) -> [Entry] {
+    return [Entry]()
+}
+
+print(buildIndex(words))
+
 
