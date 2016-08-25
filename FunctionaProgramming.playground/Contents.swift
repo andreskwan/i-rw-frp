@@ -111,3 +111,13 @@ print(sum)
 let arrayOfNumbers = [2, 5, 3, 8, 16]
 
 arrayOfNumbers.reduce(0){(total, number) in max(total, number) }
+
+/*
+ reduce has two type parameters, U and T, which can be different and certainly don’t have to be integers. This means you can reduce an array of one type into a completely different type.
+ */
+// from [Int]() to String
+
+let numbers = Array(1...10)
+    .reduce("numbers: ") {(total, number) in total + "\(number) "}
+print(numbers)
+
