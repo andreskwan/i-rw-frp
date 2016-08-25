@@ -141,6 +141,16 @@ let words = ["Cat", "Chicken", "fish", "Dog",
 //define a type alias for a dupla
 typealias Entry = (Character, [String])
 
+func distinct<T: Equatable>(source: [T]) -> [T] {
+    var unique = [T]()
+    
+    for item in source {
+        if !source.contains(item) {
+            unique.append(item)
+        }
+    }
+    return unique
+}
 
 func buildIndex(words: [String]) -> [Entry] {
     func firstLetter(word: String) -> Character {
