@@ -146,8 +146,7 @@ func buildIndex(words: [String]) -> [Entry] {
     let letters = words.map {
         //I specify what I want to return
         (word) -> Character in
-        let index = word.startIndex.advancedBy(1)
-        return Character(word.substringToIndex(index).uppercaseString)
+        Character(word.substringToIndex(word.startIndex.advancedBy(1)).uppercaseString)
     }
     print(letters)
     
