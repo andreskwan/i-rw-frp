@@ -145,7 +145,7 @@ func distinct<T: Equatable>(source: [T]) -> [T] {
     var unique = [T]()
     
     for item in source {
-        if !source.contains(item) {
+        if !unique.contains(item) {
             unique.append(item)
         }
     }
@@ -168,7 +168,15 @@ func buildIndex(words: [String]) -> [Entry] {
     letters = words.map(firstLetter)
     print(letters)
     
-    return [Entry]()
+    let distinctLetters = distinct(letters)
+    print(distinctLetters)
+    
+    return distinctLetters.map{ (letter) -> Entry in
+        return (letter, words.filter{ (word) -> Bool in
+                return firstLetter(word) == letter
+            }
+        )
+    }
 }
 
 print(buildIndex(words))
