@@ -143,11 +143,17 @@ typealias Entry = (Character, [String])
 
 
 func buildIndex(words: [String]) -> [Entry] {
-    let letters = words.map {
-        //I specify what I want to return
-        (word) -> Character in
-        Character(word.substringToIndex(word.startIndex.advancedBy(1)).uppercaseString)
+    func firstLetter(word: String) -> Character {
+        return Character(word.substringToIndex(word.startIndex.advancedBy(1)).uppercaseString)
     }
+    
+    //
+    let letters0 = words.map{ (word) -> Character in
+        return firstLetter(word)
+    }
+    print(letters0)
+    
+    let letters = words.map{ firstLetter($0) }
     print(letters)
     
     return [Entry]()
