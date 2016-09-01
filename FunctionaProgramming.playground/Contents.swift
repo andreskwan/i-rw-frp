@@ -194,4 +194,27 @@ print(buildIndex(words))
  FP in swift book
  */
 
+let oneToFour = [1,2,3,4]
+let firstNumber = oneToFour.lazy.map{ $0 * 3 }.first!
+print(firstNumber)
+
+
+/*
+ Function types - pass function as parameters - store them in parameters
+ */
+typealias SimpleOperator = (Int, Int) -> Int
+
+var simpleMathOperator: SimpleOperator
+
+func addTwoValues(a: Int, b: Int) -> Int {
+    return a + b
+}
+func square(a: Int) -> Int {
+    return a * a
+}
+
+simpleMathOperator = addTwoValues
+
+print("\(simpleMathOperator(3, 4))")
+
 
