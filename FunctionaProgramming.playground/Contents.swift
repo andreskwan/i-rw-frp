@@ -217,4 +217,14 @@ simpleMathOperator = addTwoValues
 
 print("\(simpleMathOperator(3, 4))")
 
+// as parameter
+func calculateResult(mathOperator: SimpleOperator, a: Int, b: Int) -> Int {
+    return mathOperator(a,b)
+}
+
+let mathFunc = calculateResult(simpleMathOperator, a: 8, b: 10)
+
+print("\(mathFunc)")
+
+
 
