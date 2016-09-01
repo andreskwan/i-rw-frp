@@ -227,4 +227,18 @@ let mathFunc = calculateResult(simpleMathOperator, a: 8, b: 10)
 print("\(mathFunc)")
 
 
+/*
+ Higher-order functions - accept other functions as parameters
+ */
+typealias AddSubstractOperator = (Int, Int) -> Int
+typealias SquareTripleOperator = (Int) -> Int
+
+func calculate(a a: Int , b: Int, funcA: AddSubstractOperator, funcB: SquareTripleOperator) -> Int {
+    return funcA(funcB(a), funcB(b))
+}
+
+print("The result of adding two squared values is: \(calculate(a: 2, b:2, funcA: addTwoValues, funcB: square))")
+
+
+
 
