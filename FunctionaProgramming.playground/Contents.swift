@@ -6,6 +6,10 @@ import UIKit
  Filtering 
  - do not change just extract
  */
+
+/*
+ Imperative OOP way
+ */
 var evens = [Int]()
 for i in 1...10 {
     if i % 2 == 0 {
@@ -24,6 +28,9 @@ func isEven(number: Int) -> Bool {
 // difference between map and filter 
 // filter
 //creates and returns a new array that contains only the items for which the given function returns true.
+/*
+ FP way
+ */
 evens = Array(1...10).filter(isEven)
 print(evens)
 
@@ -117,7 +124,9 @@ arrayOfNumbers.reduce(0){(total, number) in max(total, number) }
 
 /*
  Reduce 
- - has two type parameters, U and T, which can be different and certainly don’t have to be integers. This means you can reduce an array of one type into a completely different type.
+ - has two type parameters, U and T, 
+ which can be different and certainly don’t have to be integers. 
+ This means you can reduce an array of one type into a completely different type.
  */
 // from [Int]() to String
 
@@ -136,7 +145,7 @@ print(numbers)
  Building an Index the Functional Way
  */
 let words = ["Cat", "Chicken", "fish", "Dog",
-             "Mouse", "Guinea Pig", "monkey"]
+             "Mouse", "Guinea Pig", "monkey", "rat", "beard", "bird"]
 
 //define a type alias for a dupla
 typealias Entry = (Character, [String])
@@ -180,5 +189,9 @@ func buildIndex(words: [String]) -> [Entry] {
 }
 
 print(buildIndex(words))
+
+/*
+ FP in swift book
+ */
 
 
