@@ -239,6 +239,29 @@ func calculate(a a: Int , b: Int, funcA: AddSubstractOperator, funcB: SquareTrip
 
 print("The result of adding two squared values is: \(calculate(a: 2, b:2, funcA: addTwoValues, funcB: square))")
 
+/*
+ Function composition
 
+ example:
+ ineract with a backend 
+ - receive a string and 
+ - create and array of strings
+ - append a "$" as a currency to each item
+ */
+// imperative way
+
+let restfulResponse = "10,20,30,40,50,60"
+
+func createArrayFromString(content content: String) -> [String] {
+    return content.characters.split(",").map{String($0)}
+}
+
+let elements = createArrayFromString(content: restfulResponse)
+
+func formatWithCurrency(arrayString: [String]) -> [String] {
+    return arrayString.map{"$\($0)"}
+}
+
+let formatElements = formatWithCurrency(elements)
 
 
