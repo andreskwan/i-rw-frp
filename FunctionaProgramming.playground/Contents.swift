@@ -264,4 +264,19 @@ func formatWithCurrency(arrayString: [String]) -> [String] {
 
 let formatElements = formatWithCurrency(elements)
 
+//functional approach
+// 1 identify function types for each function
+// createArrayFromString: (String) -> [String]
+// formatWithCurrency: [String] -> [String]
 
+// pipe these functions
+
+// createArrayFromString: (String) -> [String] | formatWithCurrency: [String] -> [String]
+
+// combine with functional composition
+// String -> [String]
+
+let composedFunction = { data in
+    formatWithCurrency(createArrayFromString(content: data))
+}
+composedFunction(restfulResponse)
