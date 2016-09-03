@@ -293,3 +293,29 @@ var formatter: NSDateFormatter = {
     return formatter
 }()
 
+//from apple developer enumerations
+enum ofRawString: String {
+    case Pepe
+    case Papo
+}
+
+let enumValue = ofRawString.Pepe
+print(enumValue)
+
+enum ofAssociativeType {
+    case FirstAssociative(String)
+    case SecondAssociative(Int)
+}
+
+let first = ofAssociativeType.FirstAssociative("Home sweet home")
+let second = ofAssociativeType.SecondAssociative(1009)
+print(first)
+print(second)
+
+switch first {
+case ofAssociativeType.FirstAssociative(let firstValue):
+    print(firstValue)
+case let ofAssociativeType.SecondAssociative(secondValue):
+    print(secondValue)
+}
+
