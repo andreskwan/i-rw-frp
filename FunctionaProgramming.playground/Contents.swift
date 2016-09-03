@@ -1,6 +1,7 @@
 //: Playground - noun: a place where people can play
 
 import UIKit
+//From RW FP
 
 /*
  Filtering 
@@ -280,3 +281,15 @@ let composedFunction = { data in
     formatWithCurrency(createArrayFromString(content: data))
 }
 composedFunction(restfulResponse)
+
+//from Bond tutorial
+// inline initialization 
+// executes the block inline, return a NSFormatter 
+// this is not lazy, takes place right away
+var formatter: NSDateFormatter = {
+    let formatter = NSDateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+    formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+    return formatter
+}()
+
