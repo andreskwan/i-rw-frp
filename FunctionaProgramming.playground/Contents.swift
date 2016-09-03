@@ -319,3 +319,26 @@ case let ofAssociativeType.SecondAssociative(secondValue):
     print(secondValue)
 }
 
+//from SF
+//.reduce(0,combine: { (total, number) in total + number })
+let moreText = Array(arrayLiteral: "hola como estas")
+let pepe = "hola como estas".characters.reduce("", combine: { (resultString, inputChar) -> String in
+    if inputChar != " " {
+        return resultString + String(inputChar)
+    }
+    return resultString + "+"
+})
+
+//from https://developer.apple.com/reference/swift/closedrangeiterator/1781446-reduce
+let extractSpace: (String, Character) -> String = {total, input in
+    input != " " ? total + String(input) : total + "+"
+}
+
+let popo = "hola como estas".characters.reduce("", combine: extractSpace)
+popo
+
+
+
+
+
+
