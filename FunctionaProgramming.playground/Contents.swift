@@ -98,9 +98,12 @@ evens.filter{$0 % 2 == 0}:
 */
 
 print("\n================== Generic function ========================")
+// [HOF] [High order functions] [create my own HOF with generics]
+
 // input source: array of type T
 // predicate: function that takes an instance of T
-// returns: Bool
+// returns: a new array with the elements filtered using the predicate over [T]
+
 func myFilter<T>(source: [T], predicate:(T) -> Bool) -> [T] {
     var result = [T]()
     for i in source {
@@ -111,11 +114,12 @@ func myFilter<T>(source: [T], predicate:(T) -> Bool) -> [T] {
     return result
 }
 
-evens = myFilter(Array(1...10), predicate: { number in number % 2 == 0})
-print(evens)
+evens2 = myFilter(source: evens, predicate: { number in number % 2 == 0})
+print("myFilter(source: evens, predicate: { number in number % 2 == 0}) \n\(evens2)")
 
-extension CollectionType {
-    func myFilter(predicate: (Self.Generator.Element) -> Bool) -> [Self.Generator.Element] {
+//Homogenety
+extension Collection {
+    func myFilter(predicate: (Self.Iterator.Element) -> Bool) -> [Self.Iterator.Element] {
         var result : [Self.Generator.Element] = []
         for element in self {
             if predicate(element) {
@@ -126,8 +130,8 @@ extension CollectionType {
     }
 }
 
-evens = Array(1...20).myFilter({$0 % 2 == 0})
-print(evens)
+evens2 = evens.myFilter(predicate: {$0 % 2 == 0})
+print("evens.myFilter(predicate: {$0 % 2 == 0}) \n\(evens2)")
 
 /*
  - a reduce function, takes a set of inputs and generates a single output.
