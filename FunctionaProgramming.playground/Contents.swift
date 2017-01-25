@@ -133,6 +133,14 @@ extension Collection {
 evens2 = evens.myFilter(predicate: {$0 % 2 == 0})
 print("evens.myFilter(predicate: {$0 % 2 == 0}) \n\(evens2)")
 
+/* Output
+ myFilter(source: evens, predicate: { number in number % 2 == 0})
+ [0, 2, 4, 6, 8, 10]
+ evens.myFilter(predicate: {$0 % 2 == 0})
+ [0, 2, 4, 6, 8, 10]
+
+ */
+print("\n================== Reducing ========================")
 /*
  - a reduce function, takes a set of inputs and generates a single output.
  */
