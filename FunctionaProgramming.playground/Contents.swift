@@ -4,6 +4,7 @@ import UIKit
 //From RW FP link?
 //https://www.raywenderlich.com/82599/swift-functional-programming-tutorial
 
+print("================== Imperative Vs Functional ========================")
 /*
  [exp1][Filtering]
  - [Imperative]
@@ -25,7 +26,7 @@ import UIKit
  */
 //use of range operator - see Generics Doc 
 //https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Generics.html
-var evens = [Int](0...10)
+let evens = [Int](0...10)
 print("Evens before modification: \n\(evens)")
 
 var evens2 = [Int]()
@@ -77,21 +78,26 @@ print("Evens after filter and map: \n\(evens)")
  map{$0 % 2}:
  [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
  */
-print("==========================================")
 
-
-print("==================functions are closures========================")
+print("\n================== functions are closures ========================")
 // functions are closures
 // instead to pass a isEven() function use a closure/block
 // 3 Closures:
 // anonymous functions you create in-place.
-evens = Array(1...10).filter { (number) in number % 2 == 0 }
-print(evens)
+evens2 = evens.filter{ (number) in number % 2 == 0 }
+print("evens.filter{ (number) in number % 2 == 0 }: \n\(evens2)")
 
-evens = Array(1...10).filter{$0 % 2 == 0}
-print(evens)
+evens2 = evens.filter{$0 % 2 == 0}
+print("evens.filter{$0 % 2 == 0}: \n\(evens2)")
 
-//Generic function 
+/* Output
+evens.filter{ (number) in number % 2 == 0 }:
+[0, 2, 4, 6, 8, 10]
+evens.filter{$0 % 2 == 0}:
+[0, 2, 4, 6, 8, 10]
+*/
+
+print("\n================== Generic function ========================")
 // input source: array of type T
 // predicate: function that takes an instance of T
 // returns: Bool
@@ -374,11 +380,17 @@ let extractSpace: (String, Character) -> String = {total, input in
     input != " " ? total + String(input) : total + "+"
 }
 
-let popo = "hola como estas".characters.reduce("", combine: extractSpace)
+let popo = "hola como estas".characters.reduce("", extractSpace)
 popo
 
+// flatMap vs map higher order funcitons also known as transformations
+let possibleNumbers = ["1", "2", "three", "///4///", "5"]
 
+let mapped: [Int?] = possibleNumbers.map { str in Int(str) }
+// [1, 2, nil, nil, 5]
+print("map transformation which returns an array of optionals: \n\(mapped)")
 
-
-
+let flatMapped: [Int] = possibleNumbers.flatMap { str in Int(str) }
+// [1, 2, 5]
+print("flatMap transformation which returns an array with non-optionals: \n\(flatMapped)")
 
