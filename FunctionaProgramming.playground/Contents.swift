@@ -124,29 +124,26 @@ evens = Array(1...20).myFilter({$0 % 2 == 0})
 print(evens)
 
 /*
- Reducing
- 
  - a reduce function, takes a set of inputs and generates a single output.
- 
  */
 
 var sum = 0
-let evenArray = Array(1...10).filter{ $0 % 2 == 0 }
+let evenArray = evens.filter{ $0 % 2 == 0 }
 for element in evenArray {
     sum += element
 }
 print(sum)
 
 /*
- Reduce 
+ Reduce
  - to understand reduce I use the signature of the reduce method
-
+ 
  func reduce<U>(initial: U, combine: (U, T) -> U) -> U
-
+ 
  */
 sum = Array(0...10)
     .filter{ $0 % 2 == 0 }
-    .reduce(0,combine: { (total, number) in total + number })
+    .reduce(0,{ (total, number) in total + number })
 
 // simplification
 // if last argument of a function is a block/closure
@@ -166,9 +163,9 @@ let arrayOfNumbers = [2, 5, 3, 8, 16]
 arrayOfNumbers.reduce(0){(total, number) in max(total, number) }
 
 /*
- Reduce 
- - has two type parameters, U and T, 
- which can be different and certainly don’t have to be integers. 
+ Reduce
+ - has two type parameters, U and T,
+ which can be different and certainly don’t have to be integers.
  This means you can reduce an array of one type into a completely different type.
  */
 // from [Int]() to String
@@ -206,32 +203,33 @@ func distinct<T: Equatable>(source: [T]) -> [T] {
 
 func buildIndex(words: [String]) -> [Entry] {
     func firstLetter(word: String) -> Character {
-        return Character(word.substringToIndex(word.startIndex.advancedBy(1)).uppercaseString)
+        return Character(word.substring(from: word.index(after: word.startIndex)).uppercased())
     }
     
     var letters = words.map{ (word) -> Character in
-        return firstLetter(word)
+        return firstLetter(word: word)
     }
     print(letters)
     
-    letters = words.map{ firstLetter($0) }
+    letters = words.map{ firstLetter(word: $0) }
     print(letters)
     
     letters = words.map(firstLetter)
     print(letters)
     
-    let distinctLetters = distinct(letters)
+    let distinctLetters = distinct(source: letters)
     print(distinctLetters)
     
     return distinctLetters.map{ (letter) -> Entry in
         return (letter, words.filter{ (word) -> Bool in
-                return firstLetter(word) == letter
+            return firstLetter(word: word) == letter
             }
         )
     }
 }
 
-print(buildIndex(words))
+//pay attention to this
+//print(buildIndex(words: words))
 
 /*
  FP in swift book
@@ -265,7 +263,7 @@ func calculateResult(mathOperator: SimpleOperator, a: Int, b: Int) -> Int {
     return mathOperator(a,b)
 }
 
-let mathFunc = calculateResult(simpleMathOperator, a: 8, b: 10)
+let mathFunc = calculateResult(mathOperator: simpleMathOperator, a: 8, b: 10)
 
 print("\(mathFunc)")
 
@@ -276,7 +274,7 @@ print("\(mathFunc)")
 typealias AddSubstractOperator = (Int, Int) -> Int
 typealias SquareTripleOperator = (Int) -> Int
 
-func calculate(a a: Int , b: Int, funcA: AddSubstractOperator, funcB: SquareTripleOperator) -> Int {
+func calculate(a: Int , b: Int, funcA: AddSubstractOperator, funcB: SquareTripleOperator) -> Int {
     return funcA(funcB(a), funcB(b))
 }
 
@@ -284,10 +282,10 @@ print("The result of adding two squared values is: \(calculate(a: 2, b:2, funcA:
 
 /*
  Function composition
-
+ 
  example:
- ineract with a backend 
- - receive a string and 
+ ineract with a backend
+ - receive a string and
  - create and array of strings
  - append a "$" as a currency to each item
  */
@@ -295,8 +293,8 @@ print("The result of adding two squared values is: \(calculate(a: 2, b:2, funcA:
 
 let restfulResponse = "10,20,30,40,50,60"
 
-func createArrayFromString(content content: String) -> [String] {
-    return content.characters.split(",").map{String($0)}
+func createArrayFromString(content: String) -> [String] {
+    return content.characters.split(separator: ",").map{String($0)}
 }
 
 let elements = createArrayFromString(content: restfulResponse)
@@ -305,7 +303,7 @@ func formatWithCurrency(arrayString: [String]) -> [String] {
     return arrayString.map{"$\($0)"}
 }
 
-let formatElements = formatWithCurrency(elements)
+let formatElements = formatWithCurrency(arrayString: elements)
 
 //functional approach
 // 1 identify function types for each function
@@ -320,18 +318,18 @@ let formatElements = formatWithCurrency(elements)
 // String -> [String]
 
 let composedFunction = { data in
-    formatWithCurrency(createArrayFromString(content: data))
+    formatWithCurrency(arrayString: createArrayFromString(content: data))
 }
 composedFunction(restfulResponse)
 
 //from Bond tutorial
-// inline initialization 
-// executes the block inline, return a NSFormatter 
+// inline initialization
+// executes the block inline, return a NSFormatter
 // this is not lazy, takes place right away
-var formatter: NSDateFormatter = {
-    let formatter = NSDateFormatter()
+var formatter: DateFormatter = {
+    let formatter = DateFormatter()
     formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-    formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+    formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale!
     return formatter
 }()
 
@@ -364,7 +362,7 @@ case let ofAssociativeType.SecondAssociative(secondValue):
 //from SF
 //.reduce(0,combine: { (total, number) in total + number })
 let moreText = Array(arrayLiteral: "hola como estas")
-let pepe = "hola como estas".characters.reduce("", combine: { (resultString, inputChar) -> String in
+let pepe = "hola como estas".characters.reduce("", { (resultString, inputChar) -> String in
     if inputChar != " " {
         return resultString + String(inputChar)
     }
