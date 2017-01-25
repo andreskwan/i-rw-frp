@@ -1,7 +1,15 @@
 //: Playground - noun: a place where people can play
 
 import UIKit
-//From RW FP
+//From RW FP link?
+//https://www.raywenderlich.com/82599/swift-functional-programming-tutorial
+
+/*
+ [exp1][Filtering]
+ - [Imperative]
+   [tell the computer HOW to do what I need done]
+ -[functional][describe WHAT I want done rather than specify how I want it to be done]
+ */
 
 /*
  Filtering 
@@ -9,7 +17,8 @@ import UIKit
  */
 
 /*
- Imperative OOP way
+ Filtering - the old Imperative way
+ from an array extract/filter the even numbers into a new array
  */
 var evens = [Int]()
 for i in 1...10 {
@@ -19,8 +28,9 @@ for i in 1...10 {
 }
 print(evens)
 
+// Filtering with filter/HOF
 // 1 Higer-order function
-// function that I pass as argument to other functions "filter()"
+// function that takes as argument other functions "filter()"
 // 2 First-class functions - functions just like any other variable
 func isEven(number: Int) -> Bool {
     return number % 2 == 0
