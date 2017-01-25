@@ -8,48 +8,80 @@ import UIKit
  [exp1][Filtering]
  - [Imperative]
    [tell the computer HOW to do what I need done]
- -[functional][describe WHAT I want done rather than specify how I want it to be done]
+ - [functional]
+   [describe WHAT I want done rather than specify how I want it to be done]
+  */
+
+/*
+ Simple Array Filtering
+    - Inmutability - do not change just extract,
  */
 
 /*
- Filtering 
- - do not change just extract
+ Imperative filtering 
+     - the old Imperative way
+     from an array extract/filter the even numbers into a new array
+     http://stackoverflow.com/questions/602444/what-is-functional-declarative-and-imperative-programming
  */
+//use of range operator - see Generics Doc 
+//https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Generics.html
+var evens = [Int](0...10)
+print("Evens before modification: \n\(evens)")
 
-/*
- Filtering - the old Imperative way
- from an array extract/filter the even numbers into a new array
- */
-var evens = [Int]()
-for i in 1...10 {
+var evens2 = [Int]()
+//for i in 1...10 {
+for i in evens {
     if i % 2 == 0 {
-        evens.append(i)
+        evens2.append(i)
     }
 }
-print(evens)
+print("Imperative way: \n\(evens2)")
 
-// Filtering with filter/HOF
-// 1 Higer-order function
-// function that takes as argument other functions "filter()"
-// 2 First-class functions - functions just like any other variable
+/* 
+ Functional filtering
+    1 Higer-order function
+    function that takes as argument other functions "filter()"
+    2 First-class functions - functions just like any other variable
+
+    isEven()
+    is the function that I will pass as parametter to the filter(HOF)
+    this is the functional programming function.
+*/
 func isEven(number: Int) -> Bool {
     return number % 2 == 0
 }
 
 // difference between map and filter 
 // filter
-//creates and returns a new array that contains only the items for which the given function returns true.
+// Inmutable - 
+// creates and returns a new array that contains only the items for which the given function returns true.
 /*
  FP way
  */
-evens = Array(1...10).filter(isEven)
-print(evens)
+//evens = Array(1...10).filter(isEven)
+evens2 = evens.filter(isEven)
+print("filter(isEven): \n\(evens2)")
+
+evens2 = evens.map{$0 % 2}
+print("map{$0 % 2}: \n\(evens2)")
+
+print("Evens after filter and map: \n\(evens)")
+
+/* Output
+ Evens before modification:
+ [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+ Imperative way:
+ [0, 2, 4, 6, 8, 10]
+ filter(isEven):
+ [0, 2, 4, 6, 8, 10]
+ map{$0 % 2}:
+ [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+ */
+print("==========================================")
 
 
-evens = Array(1...10).map{$0 % 2}
-print(evens)
-
-// functions are closures 
+print("==================functions are closures========================")
+// functions are closures
 // instead to pass a isEven() function use a closure/block
 // 3 Closures:
 // anonymous functions you create in-place.
